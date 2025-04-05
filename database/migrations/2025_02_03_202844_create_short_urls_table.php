@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('short_code')->unique();
             $table->text('url');
-            $table->integer('access_count')->default(0);
+            $table->integer('access_count')
+                ->default(0);
             $table->timestamps();
         });
     }
