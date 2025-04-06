@@ -12,7 +12,7 @@ class ShortUrl extends Model
         parent::boot();
 
         static::creating(function ($model) {
-            $shortCode = Str::random(6);
+            $shortCode = Str::random(env('SHORTCODE_LENGTH', 12));
             $model->short_code = $shortCode;
         });
     }
