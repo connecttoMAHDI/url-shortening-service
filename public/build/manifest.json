@@ -1,0 +1,48 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-D-CWq62A.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/Pages/Index.tsx": {
+    "file": "assets/Index-DoKqHvD_.js",
+    "name": "Index",
+    "src": "resources/js/Pages/Index.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.tsx"
+    ]
+  },
+  "resources/js/Pages/NotFound.tsx": {
+    "file": "assets/NotFound-DjE_m4fb.js",
+    "name": "NotFound",
+    "src": "resources/js/Pages/NotFound.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.tsx"
+    ]
+  },
+  "resources/js/Pages/Stats.tsx": {
+    "file": "assets/Stats-CUMIUvgQ.js",
+    "name": "Stats",
+    "src": "resources/js/Pages/Stats.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.tsx"
+    ]
+  },
+  "resources/js/app.tsx": {
+    "file": "assets/app-D5833eCW.js",
+    "name": "app",
+    "src": "resources/js/app.tsx",
+    "isEntry": true,
+    "dynamicImports": [
+      "resources/js/Pages/Index.tsx",
+      "resources/js/Pages/NotFound.tsx",
+      "resources/js/Pages/Stats.tsx"
+    ],
+    "css": [
+      "assets/app-D-CWq62A.css"
+    ]
+  }
+}
