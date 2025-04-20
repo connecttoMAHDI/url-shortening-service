@@ -12,19 +12,19 @@ class ShortUrl extends Model
         parent::boot();
 
         static::creating(function ($model) {
-            $shortCode = Str::random(env('SHORTCODE_LENGTH', 12));
-            $model->short_code = $shortCode;
+            $code = Str::random(env('CODE_LENGTH', 6));
+            $model->code ??= $code;
         });
     }
 
     public function getRouteKeyName()
     {
-        return 'short_code';
+        return 'code';
     }
 
     protected $fillable = [
-        'short_code',
         'url',
+        'code',
         'access_count',
     ];
 }

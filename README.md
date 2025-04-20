@@ -10,12 +10,12 @@ This is a web application for the [URL Shortening Service](https://roadmap.sh/pr
 - Shorten long URLs
 - Retrieve the original URL from a short URL
 - View statistics on how many times a short URL has been accessed
-- Clean and modern user interface built with React and styled with Tailwind CSS
+- Clean and modern user interface built with React and styled with ShadCN
 - **Real-time** updates using Inertia.js without full page reloads
 
 ## Technologies Used
 
-- **Frontend**: React, Inertia.js, Tailwind CSS
+- **Frontend**: React, Inertia.js, ShadCN
 - **Backend**: Laravel
 - **Database**: MySQL
 - **Routing**: Inertia.js (backend and frontend integration)
@@ -77,9 +77,9 @@ Displays the statistics for the given short URL, including the number of times i
    cp .env.example .env
    php artisan key:generate
    ```
-   - Optionally, you can set the `SHORTCODE_LENGTH` value in your `.env` file to adjust the length of the generated short codes. If not provided, the default value is 12.
+   - Optionally, you can set the `CODE_LENGTH` value in your `.env` file to adjust the length of the generated short codes. If not provided, the default value is 12.
    ```env
-   SHORTCODE_LENGTH=12
+   CODE_LENGTH=12
    ```
 
 5. Run database migrations:
@@ -104,7 +104,7 @@ Displays the statistics for the given short URL, including the number of times i
 
 ## Testing
 
-The web app is designed to be easy to test via the user interface. For API testing, you can use Postman or Talend API Tester with the following routes.
+The web app is designed to be easy to test via the user interface.
 
 ## Deployment
 
@@ -115,10 +115,3 @@ npm run build
 ```
 
 Then, deploy the Laravel backend as usual, ensuring your frontend is served from the appropriate public directory.
-
----
-
-### Note
-
-- The `stats` feature and other functionalities are powered by Laravel backend APIs and rendered dynamically using React components through Inertia.js. 
-- For more details on the API routes, refer to the `API Routes` section above.

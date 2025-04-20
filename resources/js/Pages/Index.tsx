@@ -1,108 +1,135 @@
-import { Head, useForm, usePage } from "@inertiajs/react";
-import { PageProps as InertiaPageProps } from "@inertiajs/core";
+import { Head, router, usePage } from "@inertiajs/react";
+import { useForm } from 'react-hook-form';
 
-import { useState, useEffect } from "react";
 
-type IndexProps = InertiaPageProps & {
+import { Button } from "@/Components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/Components/ui/card";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/Components/ui/form";
+import { Input } from "@/Components/ui/input";
+import { PageProps } from "@/types";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from "react";
+import { z } from 'zod';
+import { Alert } from "@/Components/ui/alert";
+
+const schema = z.object({
+    url: z.string().nonempty('Please paste your long URL here...').url('Please paste a valid URL.')
+})
+
+type FormValuesType = z.infer<typeof schema>;
+
+type IndexProps = PageProps & {
     flash: {
         success: {
-            'shortified-url': string;
-            stats: string;
+            shortifiedUrl: string;
+            statsUrl: string;
         } | null;
         error: string | null;
     };
+    shortenedUrlsCount: number
 };
 
 const Index = () => {
-    const { data, setData, post, processing, errors } = useForm({
-        url: "",
+    const form = useForm<FormValuesType>({
+        resolver: zodResolver(schema),
+        defaultValues: {
+            url: ''
+        }
     });
 
+    const [copied, setCopied] = useState<boolean>(false);
+    const [processing, setProcessing] = useState<boolean>(false);
+
     const { props } = usePage<IndexProps>();
-    const success = props.flash.success;
-    const shortifiedUrl = success?.['shortified-url'];
-    const stats = success?.stats;
-
-    const [copied, setCopied] = useState(false);
-
-    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setCopied(false);
-        post("/");
-    };
-
-    useEffect(() => {
-        const clearInput = () => {
-            setData({ url: "" });
-        };
-
-        clearInput();
-    }, [success]);
 
     const copyToClipboard = () => {
-        if (success) {
-            navigator.clipboard.writeText(shortifiedUrl ?? '');
+        if (props.flash.success) {
+            navigator.clipboard.writeText(props.flash.success.shortifiedUrl ?? '');
             setCopied(true);
         }
     };
 
+    const onSubmit = (values: FormValuesType) => {
+        setProcessing(true);
+
+        router.post('/', values, {
+            onError: (errors) => {
+                Object.entries(errors).forEach(([key, message]) => {
+                    form.setError(key as keyof FormValuesType, {
+                        type: 'server',
+                        message: message as string,
+                    });
+                });
+            },
+            onFinish: () => setProcessing(false),
+            onSuccess: () => form.reset()
+        })
+    };
+
     return (
-        <div className="w-full min-h-screen grid place-content-center px-4">
-            <Head title="Home" />
+        <div className="w-full min-h-screen grid place-content-center p-4 md:p-0">
+            <Head title="Shortify" />
 
-            <div className="max-w-2xl w-full space-y-8">
-                <h1 className="text-3xl font-bold text-center text-slate-200">
-                    🔗 Shortify Your Links
-                </h1>
-                <p className="text-center text-slate-400">
-                    Paste a long URL and we'll make it short and simple.
-                </p>
-
-                <form onSubmit={onSubmit} className="flex gap-2">
-                    <input
-                        type="url"
-                        name="url"
-                        value={data.url}
-                        onChange={(e) => setData("url", e.target.value)}
-                        className="flex-grow px-4 py-2 rounded-lg border text-[#181818] border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        placeholder="https://example.com/very/long/url"
-                        required
-                    />
-                    <button
-                        type="submit"
-                        disabled={processing}
-                        className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-                    >
-                        Shorten
-                    </button>
-                </form>
-
-                {errors.url && (
-                    <p className="text-red-500 text-sm">{errors.url}</p>
+            <Card>
+                <CardHeader>
+                    <CardTitle className="text-center text-xl">
+                        Make Your Links Short & Clean
+                    </CardTitle>
+                    <CardDescription className="text-center">
+                        Paste your link. Click. Boom — it’s short and ready to go.
+                        <br />
+                        {props.shortenedUrlsCount} URLs shortened so far!
+                    </CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <Form {...form}>
+                        <form onSubmit={form.handleSubmit(onSubmit)}>
+                            <FormField
+                                control={form.control}
+                                name='url'
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormControl>
+                                            <div className="flex flex-col md:flex-row gap-2">
+                                                <Input
+                                                    autoComplete='off'
+                                                    placeholder='https://example.com/very/long/url'
+                                                    className='flex-1'
+                                                    {...field}
+                                                />
+                                                <Button
+                                                    type='submit'
+                                                    variant={'outline'}
+                                                >
+                                                    Shorten
+                                                </Button>
+                                            </div>
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        </form>
+                    </Form>
+                </CardContent>
+                {props.flash.success && (
+                    <CardFooter>
+                        <Alert>
+                            <div className="w-full flex flex-col md:flex-row gap-2 justify-center items-center">
+                                <span>
+                                    {props.flash.success.shortifiedUrl}
+                                </span>
+                                <div className="w-full flex flex-col md:flex-row gap-2">
+                                    <Button variant={'outline'} className="flex-1 w-full" onClick={copyToClipboard}>{copied ? 'Copied!' : 'Copy'}</Button>
+                                    <Button className="flex-1 w-full" onClick={() => router.visit(props.flash.success?.statsUrl ?? '#')}>
+                                        View Statistics
+                                    </Button>
+                                </div>
+                            </div>
+                        </Alert>
+                    </CardFooter>
                 )}
-
-                {success && (
-                    <div className="mt-4 flex flex-col sm:flex-row sm:items-center gap-2 bg-[#1f1f1f] p-4 rounded-lg border border-[#2c2c2c]">
-                        <span className="text-green-400 font-mono truncate">{shortifiedUrl}</span>
-                        <div className="flex gap-2 sm:ml-auto">
-                            <button
-                                onClick={copyToClipboard}
-                                className="px-3 py-1 text-sm bg-green-600 text-white rounded hover:bg-green-700"
-                            >
-                                {copied ? "Copied!" : "Copy"}
-                            </button>
-                            {stats && (
-                                <a
-                                    href={stats}
-                                    className="px-3 py-1 text-sm bg-red-600 text-white rounded hover:bg-red-700"
-                                >
-                                    View Stats
-                                </a>
-                            )}
-                        </div>
-                    </div>
-                )}
-            </div>
+            </Card>
         </div>
     );
 };

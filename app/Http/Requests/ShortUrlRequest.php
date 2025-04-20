@@ -8,9 +8,6 @@ class ShortUrlRequest extends FormRequest
 {
     public function rules(): array
     {
-        if ($this->method() === 'put') {
-            return ['url' => 'sometimes|url'];
-        }
-        return ['url' => 'required|url'];
+        return ['url' => 'required|string|url'];
     }
 }

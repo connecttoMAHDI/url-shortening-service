@@ -1,38 +1,58 @@
 {
+  "_button-DbP-97Ag.js": {
+    "file": "assets/button-DbP-97Ag.js",
+    "name": "button",
+    "imports": [
+      "resources/js/app.tsx"
+    ]
+  },
+  "_card-C_1KVQMZ.js": {
+    "file": "assets/card-C_1KVQMZ.js",
+    "name": "card",
+    "imports": [
+      "resources/js/app.tsx",
+      "_button-DbP-97Ag.js"
+    ]
+  },
   "resources/css/app.css": {
-    "file": "assets/app-D-CWq62A.css",
+    "file": "assets/app-De7_Fd78.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/Pages/Index.tsx": {
-    "file": "assets/Index-DoKqHvD_.js",
+    "file": "assets/Index-CVWDwsP6.js",
     "name": "Index",
     "src": "resources/js/Pages/Index.tsx",
     "isDynamicEntry": true,
     "imports": [
-      "resources/js/app.tsx"
+      "resources/js/app.tsx",
+      "_button-DbP-97Ag.js",
+      "_card-C_1KVQMZ.js"
     ]
   },
   "resources/js/Pages/NotFound.tsx": {
-    "file": "assets/NotFound-DjE_m4fb.js",
+    "file": "assets/NotFound-Dqn411Do.js",
     "name": "NotFound",
     "src": "resources/js/Pages/NotFound.tsx",
     "isDynamicEntry": true,
     "imports": [
-      "resources/js/app.tsx"
+      "resources/js/app.tsx",
+      "_button-DbP-97Ag.js"
     ]
   },
   "resources/js/Pages/Stats.tsx": {
-    "file": "assets/Stats-CUMIUvgQ.js",
+    "file": "assets/Stats-CfVws2TC.js",
     "name": "Stats",
     "src": "resources/js/Pages/Stats.tsx",
     "isDynamicEntry": true,
     "imports": [
-      "resources/js/app.tsx"
+      "resources/js/app.tsx",
+      "_button-DbP-97Ag.js",
+      "_card-C_1KVQMZ.js"
     ]
   },
   "resources/js/app.tsx": {
-    "file": "assets/app-D5833eCW.js",
+    "file": "assets/app-CwCMNVjM.js",
     "name": "app",
     "src": "resources/js/app.tsx",
     "isEntry": true,
@@ -42,7 +62,7 @@
       "resources/js/Pages/Stats.tsx"
     ],
     "css": [
-      "assets/app-D-CWq62A.css"
+      "assets/app-De7_Fd78.css"
     ]
   }
 }
