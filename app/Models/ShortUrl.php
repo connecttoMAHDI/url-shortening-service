@@ -27,4 +27,8 @@ class ShortUrl extends Model
         'code',
         'access_count',
     ];
+
+    protected $casts = [
+        'last_accessed_at' => 'datetime:Y-m-d\TH:i:s\Z',
+    ];
 }

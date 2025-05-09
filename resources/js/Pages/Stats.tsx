@@ -16,7 +16,7 @@ const Stats = () => {
     const { uniqueCode, originalUrl, timesAccessed, lastAccessedAt } = props
 
     return (
-        <div className="w-full min-h-screen grid place-content-center p-4 md:p-0">
+        <div className="w-full min-h-screen grid place-content-center mx-auto p-4">
             <Head title="Statistics" />
 
             <Card>
@@ -27,11 +27,11 @@ const Stats = () => {
                 </CardHeader>
                 <CardContent>
                     <div className="space-y-4">
-                        <div>
-                            <p>Original URL:</p>
+                        <div className="w-full max-w-md break-words overflow-hidden">
+                            <p className="font-semibold mb-1">Original URL:</p>
                             <a
                                 href={originalUrl}
-                                className="break-words hover:underline"
+                                className="break-words hover:underline text-sm text-blue-400"
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
@@ -54,7 +54,7 @@ const Stats = () => {
                         {lastAccessedAt && (
                             <div>
                                 <p>Last Visited At:</p>
-                                <p>{format(lastAccessedAt, 'PPP h:m a')}</p>
+                                <p>{format(new Date(lastAccessedAt), 'PPP h:mm a')}</p>
                             </div>
                         )}
                     </div>
@@ -65,7 +65,7 @@ const Stats = () => {
                     </Button>
                 </CardFooter>
             </Card>
-        </div>
+        </div >
     )
 }
 
