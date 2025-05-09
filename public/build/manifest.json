@@ -1,58 +1,58 @@
 {
-  "_button-DbP-97Ag.js": {
-    "file": "assets/button-DbP-97Ag.js",
+  "_button-Bk_K_PDc.js": {
+    "file": "assets/button-Bk_K_PDc.js",
     "name": "button",
     "imports": [
       "resources/js/app.tsx"
     ]
   },
-  "_card-C_1KVQMZ.js": {
-    "file": "assets/card-C_1KVQMZ.js",
+  "_card-DpDnIPJA.js": {
+    "file": "assets/card-DpDnIPJA.js",
     "name": "card",
     "imports": [
       "resources/js/app.tsx",
-      "_button-DbP-97Ag.js"
+      "_button-Bk_K_PDc.js"
     ]
   },
   "resources/css/app.css": {
-    "file": "assets/app-De7_Fd78.css",
+    "file": "assets/app-BRJsdDH_.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/Pages/Index.tsx": {
-    "file": "assets/Index-CVWDwsP6.js",
+    "file": "assets/Index-DdptN-Uw.js",
     "name": "Index",
     "src": "resources/js/Pages/Index.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_button-DbP-97Ag.js",
-      "_card-C_1KVQMZ.js"
+      "_button-Bk_K_PDc.js",
+      "_card-DpDnIPJA.js"
     ]
   },
   "resources/js/Pages/NotFound.tsx": {
-    "file": "assets/NotFound-Dqn411Do.js",
+    "file": "assets/NotFound-uYGxijTv.js",
     "name": "NotFound",
     "src": "resources/js/Pages/NotFound.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_button-DbP-97Ag.js"
+      "_button-Bk_K_PDc.js"
     ]
   },
   "resources/js/Pages/Stats.tsx": {
-    "file": "assets/Stats-CfVws2TC.js",
+    "file": "assets/Stats-CtHQIZIw.js",
     "name": "Stats",
     "src": "resources/js/Pages/Stats.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_button-DbP-97Ag.js",
-      "_card-C_1KVQMZ.js"
+      "_button-Bk_K_PDc.js",
+      "_card-DpDnIPJA.js"
     ]
   },
   "resources/js/app.tsx": {
-    "file": "assets/app-CwCMNVjM.js",
+    "file": "assets/app-BRWPWbK7.js",
     "name": "app",
     "src": "resources/js/app.tsx",
     "isEntry": true,
@@ -62,7 +62,7 @@
       "resources/js/Pages/Stats.tsx"
     ],
     "css": [
-      "assets/app-De7_Fd78.css"
+      "assets/app-BRJsdDH_.css"
     ]
   }
 }
